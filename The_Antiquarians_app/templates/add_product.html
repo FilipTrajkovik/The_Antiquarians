@@ -1,0 +1,141 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+
+    <br/>
+    <br/>
+    <br/>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="container payment-info-container mb-5 col-7">
+            <div class="column pt-5 pb-5">
+                <div class="d-flex justify-content-center mb-3">
+                    <hr class="col-4 hr-opacity-payment my-auto"/>
+
+                    <img src="{% static 'images/infologo.png' %}" class="col-1 seller-info" alt="">
+
+                    <hr class="col-4 hr-opacity-payment my-auto"/>
+                </div>
+
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-5">
+                            <div class="mb-3">
+                                <label for="sellerNameSurname" class="form-label text-white">Име и презиме</label>
+                                {{ form.seller_name_and_surname }}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="sellerEmail" class="form-label text-white">Емаил</label>
+                                {{ form.seller_email }}
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="mb-3">
+                                <label for="sellerCity" class="form-label text-white">Град</label>
+                                {{ form.seller_city }}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="sellerPhoneNumber" class="form-label text-white">Телефонски број</label>
+                                {{ form.seller_phone_number }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container payment-info-container mb-5 col-7">
+            <div class="column pt-5 pb-5 mb-3">
+                <div class="d-flex justify-content-center mb-3">
+                    <hr class="col-4 hr-opacity-payment my-auto"/>
+
+                    <img src="{% static 'images/addlogo.png' %}" class="col-1 seller-product-info" alt="">
+
+                    <hr class="col-4 hr-opacity-payment my-auto"/>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <div class="row col-10">
+                        <div class="col-5">
+                            <div class="mb-3 col-11">
+                                <label for="personPaymentName" class="form-label text-white">Име</label>
+                                {{ form.name }}
+                            </div>
+
+                            <div class="mb-3 col-11">
+                                <label for="personPaymentEmail" class="form-label text-white">Категорија</label>
+
+                                {{ form.category }}
+                            </div>
+                        </div>
+
+                        <div class="col-7">
+                            <div class="mb-3 row">
+                                <div class="col-4">
+                                    <label for="productPrice" class="form-label text-white">Цена</label>
+                                    {{ form.price }}
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="productQuantity" class="form-label text-white">Количина</label>
+                                    {{ form.quantity }}
+                                </div>
+
+                                <div class=" col-4">
+                                    <label for="productYearSurname" class="form-label text-white">Година</label>
+                                    {{ form.year }}
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="productModel" class="form-label text-white">Модел</label>
+                                {{ form.model }}
+                            </div>
+                        </div>
+                        <div>
+                            <div class="mb-3">
+                                <label for="productModel" class="form-label text-white">Слика</label>
+                                {{ form.image }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="productModel" class="form-label text-white">Опис</label>
+                                {{ form.description }}
+                            </textarea>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center mt-4 mb-5">
+                            <button class="btn btn-add-product text-white" type="submit">Потврди</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+     <script>
+        let form_fields = document.getElementsByTagName('input')
+        form_fields[1].placeholder = 'Име и презиме';
+        form_fields[2].placeholder = 'Емаил';
+        form_fields[3].placeholder = 'Град';
+        form_fields[4].placeholder = 'Телефонски број';
+
+        form_fields[5].placeholder = 'Име';
+        form_fields[6].placeholder = 'Цена';
+        form_fields[7].placeholder = 'Количина';
+        form_fields[8].placeholder = 'Година';
+        form_fields[9].placeholder = 'Модел';
+
+        let error_messages = document.getElementsByClassName('errorlist')
+        for (let error in error_messages){
+            error_messages[error].className = ' badge text-bg-danger mt-3 py-2 px-4'
+        }
+
+    </script>
+{% endblock content %}

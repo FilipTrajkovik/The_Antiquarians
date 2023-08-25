@@ -1,0 +1,52 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Register</title>
+    </head>
+    <body>
+
+    <div class="d-flex justify-content-center mt-5">
+        <form method="POST" action="{% url 'register_page' %}" class="d-flex justify-content-center login-div pt-3">
+            <img src="../static/images/loginlogo.png" style="width: 10.625rem; height: 10.625rem;">
+
+            {% csrf_token %}
+
+                {{ form.username }}
+
+                {{ form.email }}
+
+                {{ form.password1 }}
+
+                {{ form.password2 }}
+
+            <button class="btn w-75 btn-register mb-3 mt-3" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                     class="bi bi-r-square-fill" viewBox="0 0 16 16">
+                    <path d="M6.835 5.092v2.777h1.549c.995 0 1.573-.463 1.573-1.36 0-.913-.596-1.417-1.537-1.417H6.835Z"/>
+                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2Zm3.5 4.002h3.11c1.71 0 2.741.973 2.741 2.46 0 1.138-.667 1.94-1.495 2.24L11.5 12H9.98L8.52 8.924H6.836V12H5.5V4.002Z"/>
+                </svg>
+                Регистрирај се
+            </button>
+        </form>
+
+        {{ form.errors }}
+    </div>
+    </body>
+    </html>
+
+        <script>
+        let form_fields = document.getElementsByTagName('input')
+        form_fields[1].placeholder = 'Корисничко име';
+        form_fields[2].placeholder = 'Емаил';
+        form_fields[3].placeholder = 'Лозинка';
+        form_fields[4].placeholder = 'Повтори лозинка';
+
+        let error_messages = document.getElementsByClassName('errorlist')
+        for (let error in error_messages){
+            error_messages[error].className = ' badge text-bg-danger mt-3 py-2 px-4'
+        }
+    </script>
+{% endblock content %}

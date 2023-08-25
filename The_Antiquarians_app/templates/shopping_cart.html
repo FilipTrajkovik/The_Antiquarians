@@ -1,0 +1,73 @@
+{% extends 'main.html' %}
+{% load static %}
+{#{% load custom_filters %}#}
+{% block content %}
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Shopping cart</title>
+    </head>
+    <body>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="container">
+        <table class="table table-borderless">
+            <thead class="text-center">
+            <tr>
+                <th>Производ</th>
+                <th>Име</th>
+                <th>Огласник</th>
+                <th>Цена</th>
+                <th>Количина</th>
+                <th>Вкупна цена</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody class="text-center">
+            {% for shopping_cart_item in shopping_cart_items %}
+                <tr>
+                    <td><img src="{{ shopping_cart_item.product.imageURL }}" class="image-shopping-cart"></td>
+                    <td>{{ shopping_cart_item.product.name }}</td>
+                    <td>{{ shopping_cart_item.product.seller_name_and_surname }}</td>
+                    <td>{{ shopping_cart_item.product.price }}</td>
+                    <td>{{ shopping_cart_item.quantity }}</td>
+                    <td>{{ shopping_cart_item.total_price }} MKD</td>
+                    <td>
+                        <a href="{% url 'delete_shopping_cart_item' shopping_cart_item.id %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red"
+                             class="bi bi-trash3" viewBox="0 0 16 16">
+                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                        </svg>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-center">
+            <p class="shopping-cart-total">Вкупна сума <b>{{ shopping_cart_total }}</b> мкд</p>
+        </div>
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="text-center col-5 d-flex justify-content-end">
+                    <a href="{% url 'create_order' order.id %}">
+                        <button class="btn-create-order text-black" type="submit">Креирај нарачка</button>
+                    </a>
+                </div>
+
+                <div class="text-center col-5 d-flex justify-content-start">
+                    <a href="{% url 'delete_order' order.id %}">
+                        <button class="btn-delete-order text-black" type="submit">Избриши нарачка</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+    </html>
+{% endblock content %}

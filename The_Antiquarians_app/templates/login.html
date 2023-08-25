@@ -1,0 +1,52 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Login</title>
+    </head>
+    <body>
+    <div class="d-flex justify-content-center mt-5">
+        <form method="POST" action="{% url 'login_page' %}" class="d-flex justify-content-center login-div pt-3">
+
+            <img src="../static/images/loginlogo.png" style="width: 170px; height: 170px;">
+
+            {% csrf_token %}
+
+            <input type="text" class="form-control input-bg-color mt-3 mb-3 w-75" name="username"
+                   placeholder="Корисничко име..">
+
+            <input type="password" class="form-control input-bg-color mt-3 mb-3 w-75" name=password
+                   placeholder="Лозинка..">
+
+            <button class="btn w-75 btn-login mt-3 mb-3" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+                     class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                          d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+                    <path fill-rule="evenodd"
+                          d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                </svg>
+                Најави се
+            </button>
+
+            <p class="new-user">Нов корисник?</p>
+            <button class="btn w-75 btn-login mb-3" type="submit">
+                <a href="{% url 'register_page' %}" class="new-user"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                     class="bi bi-r-square-fill" viewBox="0 0 16 16">
+                    <path d="M6.835 5.092v2.777h1.549c.995 0 1.573-.463 1.573-1.36 0-.913-.596-1.417-1.537-1.417H6.835Z"/>
+                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2Zm3.5 4.002h3.11c1.71 0 2.741.973 2.741 2.46 0 1.138-.667 1.94-1.495 2.24L11.5 12H9.98L8.52 8.924H6.836V12H5.5V4.002Z"/>
+                </svg>
+                Регистрирај се
+            </button>
+
+        </form>
+        <br/>
+        <br/>
+
+    </div>
+    </body>
+    </html>
+{% endblock content %}

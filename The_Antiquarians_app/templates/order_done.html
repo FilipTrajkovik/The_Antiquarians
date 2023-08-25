@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+    <div class="container">
+        <div class="d-flex justify-content-center mb-0">
+            <img src="../static/images/logo.png" style="width: 37.5rem; height: 31.25rem; margin-top: -3.75rem">
+        </div>
+
+        <div class="container mb-2 order-info" style="margin-top: -1.9rem; margin-bottom: 1.5rem">
+            <h2 class="text-center text-white pt-5">Нарачката е успешно креирана!</h2>
+            <div class="d-flex justify-content-center">
+                <hr class="col-3 border m-auto border-2"/>
+            </div>
+            <h2 class="text-center text-white">Ви благодариме на довербата!</h2>
+        </div>
+
+        <div class="d-flex justify-content-center mt-4 mb-3">
+            <a href="{% url 'products' %}">
+                <button class="btn btn-order-to-home text-white" type="submit">Назад кон производи</button>
+            </a>
+        </div>
+    </div>
+    </body>
+    </html>
+{% endblock content %}

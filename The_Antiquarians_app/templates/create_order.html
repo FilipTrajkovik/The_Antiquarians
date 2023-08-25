@@ -1,0 +1,242 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Create order</title>
+    </head>
+    <body>
+    <br/>
+    <br/>
+    <br/>
+
+    <form method="post" action="{% url 'create_order' order.id %}" id="orderForm">
+        {% csrf_token %}
+        <div class="container payment-info-container mb-5 col-7">
+            <div class="column pt-5 pb-5 mb-3">
+                <div class="d-flex justify-content-center mb-3">
+                    <hr class="col-4 hr-opacity-payment"/>
+                    <img src="../static/images/infologo.png" class="col-1 person-payment-info">
+                    <hr class="col-4 hr-opacity-payment"/>
+                </div>
+
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-5">
+                            <div class="mb-3">
+                                <label for="personPaymentName" class="form-label text-white">Име</label>
+                                <input type="text" class="form-control" aria-describedby="nameHelp"
+                                       placeholder="пр. Филип" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="personPaymentEmail" class="form-label text-white">Емаил</label>
+                                <input type="email" class="form-control" aria-describedby="emailHelp"
+                                       placeholder="пр. filiptrajkovik@test.com" required>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="personPaymentCity" class="form-label text-white">Град</label>
+                                        <input type="text" class="form-control"
+                                               aria-describedby="cityHelp"
+                                               placeholder="пр. Штип" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div>
+                                        <label for="personPaymentPostalCode" class="form-label text-white">Поштенски
+                                            број</label>
+                                        <input type="text" class="form-control"
+                                               aria-describedby="postalCodeHelp"
+                                               placeholder="пр. 2000" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-check mt-2 mb-2">
+                                <input class="form-check-input" type="radio" name="flexRadioRole" id="payWithCard">
+                                <label class="form-check-label text-white radio_card card-radio-button"
+                                       for="payWithCard">
+                                    Плати со картичка
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                         fill="currentColor"
+                                         class="bi bi-credit-card pay" viewBox="0 0 16 16">
+                                        <path
+                                                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
+                                        <path
+                                                d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
+                                    </svg>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="mb-3">
+                                <label for="personPaymentSurname" class="form-label text-white">Презиме</label>
+                                <input type="text" class="form-control" aria-describedby="SurnameHelp"
+                                       placeholder="пр. Трајковиќ" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="personPaymentPhoneNumber" class="form-label text-white">Телефонски
+                                    број</label>
+                                <input type="tel" class="form-control" aria-describedby="phoneNumberHelp"
+                                       placeholder="пр. 078123456" required>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="personPaymentAddress" class="form-label text-white">Адреса на
+                                    живеење</label>
+                                <input type="text" class="form-control" aria-describedby="addressHelp"
+                                       placeholder="пр. Булевар ЈНА 12" required>
+                            </div>
+
+                            <div class="form-check mt-2 mb-2">
+                                <input class="form-check-input" type="radio" name="flexRadioRole" id="payOnDelivery"
+                                       checked>
+                                <label class="form-check-label text-white" for="payOnDelivery">
+                                    Плати при достава
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                         fill="currentColor"
+                                         class="bi bi-truck" viewBox="0 0 16 16">
+                                        <path
+                                                d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                                    </svg>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container payment-info-container mb-5 col-7">
+            <div class="column pt-5 pb-5">
+                <div class="d-flex justify-content-center mb-3">
+                    <hr class="col-4 hr-opacity-payment"/>
+
+                    <img src="../static/images/cartlogo.png" class="col-1 person-payment-info">
+
+                    <hr class="col-4 hr-opacity-payment"/>
+                </div>
+
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-5">
+                            <div class="mb-3">
+                                <label for="personPaymentNameSurname" class="form-label text-white">Име и
+                                    презиме</label>
+                                <input type="text" class="form-control card-pay-only" aria-describedby="nameSurnameHelp"
+                                       placeholder="пр. Филип Трајковиќ" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="personPaymentEmail" class="form-label text-white">Валидна до</label>
+                                <input type="text" class="form-control card-pay-only"
+                                       aria-describedby="cardValidUntilHelp"
+                                       placeholder="пр. 11/25" required>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="mb-3">
+                                <label for="personPaymentSurname" class="form-label text-white">Број на
+                                    картичка</label>
+                                <input type="text" class="form-control card-pay-only" aria-describedby="cardNumberHelp"
+                                       placeholder="пр. 1234 5678 1234 5678" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="personPaymentPhoneNumber" class="form-label text-white"
+                                       placeholder="пр. 123">CCV</label>
+                                <input type="number" class="form-control card-pay-only" aria-describedby="cardCCVHelp"
+                                       placeholder="пр. 123" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center mt-4 mb-5">
+            <button class="btn btn-make-order text-white" type="submit">Нарачај</button>
+        </div>
+    </form>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modalText">This input is disabled.</p>
+        </div>
+    </div>
+
+    </body>
+    </html>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let radio_btn_payOnDelivery = document.getElementById('payOnDelivery');
+            let radio_btn_payWithCard = document.getElementById('payWithCard');
+            let card_pay_inputs = document.getElementsByClassName('card-pay-only');
+            let orderForm = document.getElementById('orderForm');
+
+            function toggleCardPayInputs(disable) {
+                Array.from(card_pay_inputs).forEach(function (input) {
+                    input.disabled = disable;
+                    if (disable) {
+                        input.style.backgroundColor = '#a6a6a6';
+                        input.removeAttribute('required');
+                        input.value = '';
+                    } else {
+                        input.style.backgroundColor = '';
+                        input.setAttribute('required', 'required');
+                    }
+                });
+            }
+
+            toggleCardPayInputs(radio_btn_payOnDelivery.checked);
+
+            radio_btn_payOnDelivery.addEventListener('change', function () {
+                if (radio_btn_payOnDelivery.checked) {
+                    toggleCardPayInputs(true);
+                } else {
+                    toggleCardPayInputs(false);
+                }
+            });
+
+            radio_btn_payWithCard.addEventListener('change', function () {
+                if (radio_btn_payWithCard.checked) {
+                    toggleCardPayInputs(false);
+                } else {
+                    toggleCardPayInputs(true);
+                }
+            });
+
+            orderForm.addEventListener('submit', function (event) {
+                const inputs = orderForm.querySelectorAll('input[required]:not([disabled])');
+                let isValid = true;
+
+                inputs.forEach(function (input) {
+                    if (!input.value) {
+                        isValid = false;
+                        input.classList.add('is-invalid');
+                    } else {
+                        input.classList.remove('is-invalid');
+                    }
+                });
+
+                if (!isValid) {
+                    event.preventDefault();
+                }
+            });
+        });
+
+    </script>
+
+{% endblock content %}

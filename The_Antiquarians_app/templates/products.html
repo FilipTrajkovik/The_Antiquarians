@@ -1,0 +1,125 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+    <div class="container mt-5">
+        <form method="GET" action="{% url 'products' %}">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <input class="form-control btn-search-products" type="search" name="name_filter"
+                           placeholder="Пребарај по име" aria-label="Search"
+                            {% if model_filter_value %}
+                               value="{{ name_filter_value }}"
+                            {% endif %}>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="dropdown">
+{#                        <button class="btn btn-secondary dropdown-toggle btn-search-products w-100" type="button"#}
+{#                                id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">#}
+{#                            Пребарај по категорија#}
+{#                        </button>#}
+                        <select class="form-control dropdown-toggle btn-search-products w-100" name="category_filter">
+                            <option value="">Сите</option>
+                            {% for category in categories %}
+                                <option value="{{ category }}"
+                                        {% if category_filter_value == category %}selected{% endif %}>{{ category }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <input class="form-control btn-search-products" type="search" name="model_filter"
+                           placeholder="Пребарај по модел" aria-label="Search"
+                            {% if model_filter_value %}
+                                value="{{ model_filter_value }}"
+                            {% endif %}>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <input class="form-control btn-search-products" type="search" name="year_filter"
+                           placeholder="Пребарај по година" aria-label="Search"
+                            {% if model_filter_value %}
+                           value="{{ year_filter_value }}"
+                            {% endif %}>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3 container my-3">
+                <button class="btn w-100 btn-add-new-product" type="submit">Пребарај</button>
+            </div>
+
+            {% if user.is_superuser %}
+                <div class="col-lg-6 col-md-6 container my-3">
+                    <a class="btn w-100 btn-add-new-product" href="{% url 'add_product' %}">Додади продукт</a>
+                </div>
+            {% endif %}
+        </form>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            {% for product in products %}
+                <div class="px-3 col-3 my-4">
+                    <div class="card product-container">
+                        <img src="{{ product.imageURL }}" class="card-img-top img-prod">
+                        <div class="card-body">
+                            <h5 class="card-title text-white text-center">{{ product.name }}</h5>
+                            {% if product.quantity > 0 %}
+                                <p class="card-btn-stock text-white">
+                                    Залиха
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="green"
+                                         class="bi bi-check-circle stock" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                                    </svg>
+                                </p>
+                            {% else %}
+                                <p class="card-btn-stock text-white">
+                                    Залиха
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red"
+                                         class="bi bi-x-circle stock" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                    </svg>
+                                </p>
+                            {% endif %}
+                            <div class="d-flex justify-content-center card-btn-product">
+                                <a class="text-white btn fs-5" href="{% url 'product_details' product.id %}">Повеќе за
+                                    производот</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if products.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ products.previous_page_number }}" tabindex="-1">Претходно</a>
+                </li>
+            {% endif %}
+
+            {% for num in products.paginator.page_range %}
+                {% if products.number == num %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ num }}</span>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if products.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ products.next_page_number }}">Следно</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endblock content %}

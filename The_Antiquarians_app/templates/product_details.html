@@ -1,0 +1,178 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Product details</title>
+    </head>
+    <body>
+    <div class="container mt-5">
+        <div class="row d-flex justify-content-between">
+            <div class="col-lg-7 col-md-12">
+                <div class="mb-4 d-flex justify-content-between">
+                    <form method="POST" action="{% url 'add_to_shopping_cart'%}">
+                        {% csrf_token %}
+                        <input type="hidden" name="antique_item_id" value="{{ antique_item.id }}">
+                        <button class="btn-product-details text-white" type="submit">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
+                                 class="bi bi-cart-plus" viewBox="0 0 16 16">
+                                <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"/>
+                                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                            </svg>
+                            Додади во кошничка
+                        </button>
+                    </form>
+                    <div>
+                        <form method="POST" action="{% url 'product_details' antique_item.id %}">
+                            {% csrf_token %}
+                            <button class="btn-product-details text-white" style="width: 25%;" type="submit"
+                                    name="decrease_quantity">
+                                -
+                            </button>
+
+                            <button class="btn-product-details text-white" type="submit" disabled>
+                                {{ quantity }}
+                            </button>
+
+                            <button class="btn-product-details text-white" style="width: 25%" type="submit"
+                                    name="increase_quantity">
+                                +
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4 ">
+                    <div class="image-container product-details-container">
+                        <img src="{{ antique_item.imageURL }}" alt="Image" class="custom-image w-100 img-fluid">
+                        <div class="text-overlay">
+                            <div class="text-row">
+                                <p class="second-sentence">{{ antique_item.price }}</p>
+                                <p class="first-sentence">На залиха {{ antique_item.quantity }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6 d-flex flex-column align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="black"
+                             class="bi bi-person-lines-fill mb-2" viewBox="0 0 16 16">
+                            <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+                        </svg>
+                        <p class="list-group-item product-manufacturer-info w-100">{{ antique_item.seller_name_and_surname }}</p>
+                    </div>
+
+                    <div class="col-6 d-flex flex-column align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="black"
+                             class="bi bi-telephone-forward mb-2" viewBox="0 0 16 16">
+                            <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zm10.762.135a.5.5 0 0 1 .708 0l2.5 2.5a.5.5 0 0 1 0 .708l-2.5 2.5a.5.5 0 0 1-.708-.708L14.293 4H9.5a.5.5 0 0 1 0-1h4.793l-1.647-1.646a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                        <p class="list-group-item product-manufacturer-info w-100">{{ antique_item.seller_phone_number }}</p>
+
+                    </div>
+
+                    <div class="col-6 d-flex flex-column align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="black"
+                             class="bi bi-envelope mb-2" viewBox="0 0 16 16">
+                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+                        </svg>
+                        <p class="list-group-item product-manufacturer-info w-100">{{ antique_item.seller_email }}</p>
+                    </div>
+
+                    <div class="col-6 d-flex flex-column align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+                             class="bi bi-buildings  mb-2" viewBox="0 0 16 16">
+                            <path d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022ZM6 8.694 1 10.36V15h5V8.694ZM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15Z"/>
+                            <path d="M2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-2 2h1v1H2v-1Zm2 0h1v1H4v-1Zm4-4h1v1H8V9Zm2 0h1v1h-1V9Zm-2 2h1v1H8v-1Zm2 0h1v1h-1v-1Zm2-2h1v1h-1V9Zm0 2h1v1h-1v-1ZM8 7h1v1H8V7Zm2 0h1v1h-1V7Zm2 0h1v1h-1V7ZM8 5h1v1H8V5Zm2 0h1v1h-1V5Zm2 0h1v1h-1V5Zm0-2h1v1h-1V3Z"/>
+                        </svg>
+                        <p class="list-group-item product-manufacturer-info w-100">{{ antique_item.seller_city }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12">
+                <div class="mt-1">
+                    <p class="text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
+                             class="bi bi-info-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                        </svg>
+                    </p>
+                    <ul class="list-group text-center">
+                        <li class="list-group-item product-description" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="Целосно име">
+                            {{ antique_item.name }}
+                        </li>
+                        <li class="list-group-item product-description" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="Категорија">
+                            {{ antique_item.category }}
+                        </li>
+                        <li class="list-group-item product-description" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="Модел">
+                            {{ antique_item.model }}
+                        </li>
+                        <li class="list-group-item product-description" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="Година произведено">
+                            {{ antique_item.year }}година
+                        </li>
+                        <li class="list-group-item product-description" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="Опис">
+                            {{ antique_item.description }}
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 p-0">
+                        <div class="text-overlay">
+                            <div class="text-row">
+                                <a class="btn-prod-det-back text-white w-100" href="{% url 'products' %}">
+                                    Назад кон производи
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if user.is_superuser %}
+                <div class="row justify-content-between">
+                    <div class="col-6 p-0">
+                        <div class="text-overlay">
+                            <div class="text-row">
+                                <a class="product-detail-edit-btn w-50" href="{% url 'product_edit' antique_item.id %}">
+                                    <span class="fs-2"></span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="green"
+                                         class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                        <path fill-rule="evenodd"
+                                              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 p-0">
+                        <div class="text-overlay">
+                            <div class="text-row product-detail-delete-div">
+                                <a class="product-detail-delete-btn w-50"
+                                   href="{% url 'product_delete' antique_item.id %}">
+                                    <span class="fs-2"></span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="red"
+                                         class="bi bi-trash3" viewBox="0 0 16 16">
+                                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    </body>
+    </html>
+
+{% endblock content %}

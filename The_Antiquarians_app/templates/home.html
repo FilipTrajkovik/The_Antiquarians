@@ -1,0 +1,46 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+    </head>
+    <body>
+    <div class="d-flex justify-content-center mb-0">
+        <img src="../static/images/logo.png" style="width: 37.5rem; height: 31.25rem; margin-top: -3.75rem">
+    </div>
+
+    <div class="container mb-3" style="margin-top: -2.5rem">
+        <h2 class="text-center text-white">Добредојдовте на е-продавницата за стари работи</h2>
+        <div class="d-flex justify-content-center">
+            <hr class="col-3 border m-auto border-2"/>
+        </div>
+        <h1 class="text-center text-white">The Antiquarians</h1>
+    </div>
+
+    <div class="home-info-text">
+        <h5 class="container text-center text-white pt-3">
+            Веруваме дека секој производ има приказна за раскажување.
+        </h5>
+        <h5 class="container text-center text-white">
+            Открите широк избор на автентични и тешко достапни компоненти за обновување и оживување на вашите сакани
+            винтиџ предмети. Од стари хардвер и стари делови од апарати до ретка електроника и сложени механизми за
+            часовници, нашата е-продавница е засолниште за ентузиасти кои сакаат да за зачуваат автентичноста и
+            изработата на нивните негувани богатства.
+
+        </h5>
+        <h5 class="container text-center text-white pb-3">
+            Најдете го делот што недостасува што го комплетира вашиот проект за реставрација и оживете ги вашите стари
+            предмети со нашата богата колекција на стари делови.
+        </h5>
+    </div>
+
+    <div class="d-flex justify-content-center mt-3 mb-3">
+        <a  href="{% url 'user_manual' %}" class="btn btn-login-color text-white">Кориснички прирачник</a>
+    </div>
+
+
+    </body>
+    </html>
+{% endblock content %}
