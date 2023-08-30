@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-rik3r0!*uxuh2e^4f_l9e+$14uv#@t0zt!1@5t@cv*_%5bm(68
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["antiquarianseshop201115.pythonanywhere.com"]
 
 
 # Application definition
@@ -118,12 +118,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "The_Antiquarians_app/static/images")
+MEDIA_ROOT = os.path.join(BASE_DIR, "The_Antiquarians_app/static/images/")
 MEDIA_URL = 'The_Antiquarians_app/static/images/images/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'The_Antiquarians_app/static')
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'The_Antiquarians_app/static')
+# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
